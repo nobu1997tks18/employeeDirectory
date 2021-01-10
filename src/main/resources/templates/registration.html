@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>従業員登録</h1>
+		<form th:action="@{/registration}" method="post">
+			<label for="email">Email</label>
+			<input type="text" name="email"><br/>
+			<label for="email">Email_Conf</label>
+			<input type="text" name="email_conf"><br/>
+			<label for="password">Password</label>
+			<input type="password" name="password"><br/>
+			<label for="password">Password_Conf</label>
+			<input type="password" name="password_conf"><br/>
+			<label for="password">Password_Conf</label>
+			<input type="password" name="password_conf"><br/>
+			<input type="submit" value="Resister">
+		</form>
+		<a th:href="@{/login}"> ログイン</a>
+</body>
+</html>

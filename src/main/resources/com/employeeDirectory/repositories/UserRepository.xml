@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.employeeDirectory.repositories.UserRepository">
+	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails" >
+	<![CDATA[
+		select
+			users.id,
+			users.email,
+			users.password,
+			users.username,
+			departments.department,
+			projects.project,
+			users.locked,
+			users.expired,
+			roles.role_name
+		from Users
+		join user_role on users.id = user_role.user_id
+		join roles on user_role.role_id = roles.id
+		join departments on users.department_id = departments.id
+		join projects on users.project_id = projects.id
+		where users.email = #{email};
+	]]>
+
+	</select>
+	<resultMap type="com.employeeDirectory.beans.User" id="userDetails">
+		<result property="id" column="ID"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="password" column="PASSWORD"></result>
+		<result property="username" column="USERNAME"></result>
+		<result property="department" column="DEPARTMENT"></result>
+		<result property="entrance_date" column="ENTRANCE_DATE"></result>
+		<result property="locked" column="LOCKED"></result>
+		<result property="expired" column="EXPIRED"></result>
+		<collection property="roles" ofType="java.lang.String">
+		<result column="role_name"></result>
+		</collection>
+	</resultMap>
+</mapper>
