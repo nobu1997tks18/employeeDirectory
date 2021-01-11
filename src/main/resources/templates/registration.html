@@ -15,8 +15,27 @@
 			<input type="password" name="password"><br/>
 			<label for="password">Password_Conf</label>
 			<input type="password" name="password_conf"><br/>
-			<label for="password">Password_Conf</label>
-			<input type="password" name="password_conf"><br/>
+			<label for="username">Username</label>
+			<input type="text" name="username"><br/>
+			<label for="department">部署</label>
+			<select name="department_id">
+				<option value="1">経営</option>
+				<option value="2">営業部</option>
+				<option value="3">人事</option>
+				<option value="4">受託開発</option>
+				<option value="5">SES</option>
+				<option value="6">事業部</option>
+			</select><br/>
+			<label for="project_id">プロジェクト</label>
+			<select name="project_id">
+				<option value="1">教育</option>
+				<option value="2">Freeks</option>
+				<option value="3">カリキュラム</option>
+				<option value="4">デザイン</option>
+				<option value="5">広報</option>
+			</select><br/>
+
+
 			<input type="submit" value="Resister">
 		</form>
 		<a th:href="@{/login}"> ログイン</a>

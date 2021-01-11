@@ -2,6 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.employeeDirectory.repositories.UserRepository">
+
+	<insert id ="registerUser" parameterType="com.employeeDirectory.beans.User" useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[
+		insert into users
+		(email, password, username, entrance_date)
+		values
+		(#{email},#{password}, #{username}, #{entrance_date});
+	]]>
+	</insert>
+
+	<insert id ="registerUserRole" parameterType="com.employeeDirectory.beans.User">
+		<![CDATA[
+			insert into user_role (user_id, role_id)values (#{id}, 1)
+		]]>
+	</insert>
+
+	<insert id ="registerUserDepartment" parameterType="map">
+		<![CDATA[
+			insert into user_department (user_id, department_id) values (#{User.id}, #{department_id})
+		]]>
+	</insert>
+
+	<insert id ="registerUserProject" parameterType="map">
+		<![CDATA[
+			insert into user_role (user_id, role_id)values (#{User.id}, #{project_id})
+		]]>
+	</insert>
+
 	<select id="identifyUser" parameterType="java.lang.String" resultMap="userDetails" >
 	<![CDATA[
 		select
@@ -17,8 +45,10 @@
 		from Users
 		join user_role on users.id = user_role.user_id
 		join roles on user_role.role_id = roles.id
-		join departments on users.department_id = departments.id
-		join projects on users.project_id = projects.id
+		join user_department on users.id = user_department.user_id
+		join departments on user_department.department_id = departments.id
+		join user_project on users.id = user_project.user_id
+		join projects on user_project.project_id = projects.id
 		where users.email = #{email};
 	]]>
 
@@ -28,12 +58,17 @@
 		<result property="email" column="EMAIL"></result>
 		<result property="password" column="PASSWORD"></result>
 		<result property="username" column="USERNAME"></result>
-		<result property="department" column="DEPARTMENT"></result>
 		<result property="entrance_date" column="ENTRANCE_DATE"></result>
 		<result property="locked" column="LOCKED"></result>
 		<result property="expired" column="EXPIRED"></result>
+		<collection property="departments" ofType="java.lang.String">
+			<result column="DEPARTMENT"></result>
+		</collection>
+		<collection property="projects" ofType="java.lang.String">
+			<result column="PROJECT"></result>
+		</collection>
 		<collection property="roles" ofType="java.lang.String">
-		<result column="role_name"></result>
+			<result column="ROLE_NAME"></result>
 		</collection>
 	</resultMap>
 </mapper>
