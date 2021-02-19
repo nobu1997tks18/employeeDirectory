@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.employeeDirectory.beans.User;
 import com.employeeDirectory.repositories.UserRepository;
 
 @Service
@@ -15,7 +16,10 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO 自動生成されたメソッド・スタブ
+		User user = userRepository.identifyUser(username);
+		if (user == null) {
+			throw new UsernameNotFoundException(username);
+		}
 		return userRepository.identifyUser(username);
 	}
 

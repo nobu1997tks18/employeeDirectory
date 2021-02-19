@@ -20,8 +20,8 @@ public class User implements UserDetails {
 	private boolean expired;
 	private boolean locked;
 	private List<String> roles;
-	private List<String> departments;
-	private List<String> projects;
+	private String department;
+	private String project;
 	private String entrance_date;
 
 	@Autowired
@@ -126,20 +126,20 @@ public class User implements UserDetails {
 		this.entrance_date = entrance_date;
 	}
 
-	public List<String> getProject() {
-		return projects;
+	public String getProject() {
+		return project;
 	}
 
-	public void setProject(List<String> project) {
-		this.projects = project;
+	public void setProject(String project) {
+		this.project = project;
 	}
 
-	public void setDepartment(List<String> department) {
-		this.departments = department;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
-	public List<String> getDepartment() {
-		return departments;
+	public String getDepartment() {
+		return department;
 	}
 
 }

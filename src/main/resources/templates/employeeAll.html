@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>Email</th>
+				<th>Username</th>
+				<th>department</th>
+				<th>project</th>
+				<th>リンク</th>
+			</tr>
+			<tr th:object="${allUsers}" th:each="user : ${allUsers}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${user.username}"></td>
+				<td th:text="${user.department}"></td>
+				<td th:text="${user.project}"></td>
+				<td><a th:href="@{/employeeData/{id}(id=${user.id})}">ユーザーページへ</a></td>
+			</tr>
+		</table>
+	</div>
+	<a th:href="@{/}">Topへ</a>
+</html>

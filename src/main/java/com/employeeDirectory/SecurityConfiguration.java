@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.ForwardAuthenticationFailureHandler;
 
 import com.employeeDirectory.service.DatabaseUserDetailsService;
 
@@ -39,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.formLogin()
 				.loginPage("/login").usernameParameter("email").passwordParameter("password").permitAll()
+				.failureHandler(new ForwardAuthenticationFailureHandler("/login-error"))
 				.and()
 				.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID");
 	}

@@ -6,19 +6,42 @@
 </head>
 <body>
 	<h1>従業員登録</h1>
-		<form th:action="@{/registration}" method="post">
+		<form th:action="@{/registration}" method="post" th:object="${userRegistrationBean}">
 			<label for="email">Email</label>
-			<input type="text" name="email"><br/>
+			<input type="text" th:field="*{email}"><br/>
+			<div th:if="${duplicateError}">
+				<span th:text="${duplicateError}"></span>
+			</div>
+			<div th:if="${#fields.hasErrors('email')}">
+				<span th:errors="*{email}"></span>
+			</div>
+
 			<label for="email">Email_Conf</label>
-			<input type="text" name="email_conf"><br/>
+			<input type="text" th:field="*{email_conf}"><br/>
+			<div th:if="${#fields.hasErrors('emailConfirmed')}">
+				<span th:errors="*{emailConfirmed}"></span>
+			</div>
+
 			<label for="password">Password</label>
-			<input type="password" name="password"><br/>
+			<input type="password" th:field="*{password}"><br/>
+			<div th:if="${#fields.hasErrors('password')}">
+				<span th:errors="*{password}"></span>
+			</div>
+
 			<label for="password">Password_Conf</label>
-			<input type="password" name="password_conf"><br/>
+			<input type="password" th:field="*{password_conf}"><br/>
+			<div th:if="${#fields.hasErrors('passwordConfirmed')}">
+				<span th:errors="*{passwordConfirmed}"></span>
+			</div>
+
 			<label for="username">Username</label>
-			<input type="text" name="username"><br/>
+			<input type="text" th:field="*{username}"><br/>
+			<div th:if="${#fields.hasErrors('username')}">
+				<span th:errors="*{username}"></span>
+			</div>
+
 			<label for="department">部署</label>
-			<select name="department_id">
+			<select th:field="*{department_id}">
 				<option value="1">経営</option>
 				<option value="2">営業部</option>
 				<option value="3">人事</option>
@@ -26,14 +49,21 @@
 				<option value="5">SES</option>
 				<option value="6">事業部</option>
 			</select><br/>
+			<div th:if="${#fields.hasErrors('department_id')}">
+				<span th:errors="*{department_id}"></span>
+			</div>
+
 			<label for="project_id">プロジェクト</label>
-			<select name="project_id">
+			<select th:field="*{project_id}">
 				<option value="1">教育</option>
 				<option value="2">Freeks</option>
 				<option value="3">カリキュラム</option>
 				<option value="4">デザイン</option>
 				<option value="5">広報</option>
 			</select><br/>
+			<div th:if="${#fields.hasErrors('project_id')}">
+				<span th:errors="*{project_id}"></span>
+			</div>
 
 
 			<input type="submit" value="Resister">

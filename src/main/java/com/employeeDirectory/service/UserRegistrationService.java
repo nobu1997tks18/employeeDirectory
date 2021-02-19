@@ -23,4 +23,9 @@ public class UserRegistrationService {
 			throw new RuntimeException();
 		}
 	}
+
+	public boolean isDuplicateUser(String email) {
+		User user = userRepository.identifyUser(email);
+		return user != null;
+	}
 }

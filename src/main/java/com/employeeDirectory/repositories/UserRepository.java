@@ -1,5 +1,7 @@
 package com.employeeDirectory.repositories;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,5 +18,9 @@ public interface UserRepository {
 	public int registerUserDepartment(@Param("User") User user, @Param("department_id") int id);
 
 	public int registerUserProject(@Param("User") User user, @Param("project_id") int id);
+
+	public List<User> getAllUser();
+
+	public User getUser(int id);
 
 }
